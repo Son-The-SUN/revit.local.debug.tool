@@ -21,7 +21,9 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: install sdk
-      run: dotnet-install.ps1
+      run: |
+        Invoke-WebRequest 'https://dot.net/v1/dotnet-install.ps1' -Proxy $env:HTTP_PROXY -ProxyUseDefaultCredentials -OutFile 'dotnet-install.ps1';
+./dotnet-install.ps1 -InstallDir '~/.dotnet' -Version '8.0.3' -Runtime 'dotnet' -ProxyAddress $env:HTTP_PROXY -ProxyUseDefaultCredentials;
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
