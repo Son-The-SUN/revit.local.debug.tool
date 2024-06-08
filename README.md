@@ -1,7 +1,7 @@
 # Design Automation for Revit - Local debug tool 
 
 ![Platforms](https://img.shields.io/badge/Plugins-Windows-lightgray.svg)
-![.NET](https://img.shields.io/badge/.NET%20Framework-4.8-blue.svg)
+![.NET](https://img.shields.io/badge/.NET%20Framework-8.0-blue.svg)
 [![Revit](https://img.shields.io/badge/Revit-2018|2019|2020|2021|2022|2023|2024-lightblue.svg)](http://developer.autodesk.com/)
 
 # Description
