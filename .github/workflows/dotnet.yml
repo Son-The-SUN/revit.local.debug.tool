@@ -1,34 +1,20 @@
 # This workflow will build a .NET project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
-name: .NET
+name: DesignAutomation.NET
 
 on:
   push:
     branches: [ "local" ]
-  pull_request:
-    branches: [ "local" ]
-
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
+  setup_dotnet:
+    strategy:
+      matrix:
+        os: [macos,windows,ubuntu]
+    runs-on: ${{ matrix.os }}-latest
     steps:
     - uses: actions/checkout@v4
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
-    - name: install sdk
-      run: |
-        Invoke-WebRequest 'https://dot.net/v1/dotnet-install.ps1' -Proxy $env:HTTP_PROXY -ProxyUseDefaultCredentials -OutFile 'dotnet-install.ps1';
-./dotnet-install.ps1 -InstallDir '~/.dotnet' -Version '8.0.3' -Runtime 'dotnet' -ProxyAddress $env:HTTP_PROXY -ProxyUseDefaultCredentials;
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      continue-on-error: true
-      run: dotnet build --no-restore
-    - name: Test
-      continue-on-error: true
-      run: dotnet test --no-build --verbosity normal
